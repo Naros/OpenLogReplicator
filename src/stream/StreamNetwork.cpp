@@ -131,6 +131,10 @@ namespace OpenLogReplicator {
         if (socketFD == -1)
             throw NetworkException(10061, "network error, errno: " + std::to_string(errno) + ", message: " + strerror(errno));
 
+        std::ostringstream ss;
+        ss << "sendMessage with length64=" << length;
+        ctx->info(0, ss.str());
+
         fd_set wset;
         fd_set w;
         FD_ZERO(&wset);
