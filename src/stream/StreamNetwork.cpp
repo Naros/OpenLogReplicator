@@ -256,7 +256,7 @@ namespace OpenLogReplicator {
         if (*(reinterpret_cast<uint32_t*>(msg)) < 0xFFFFFFFF) {
             // 32-bit message length
             if (length < *(reinterpret_cast<uint32_t*>(msg)))
-                throw NetworkException(10055, "message from client is incomplete");
+                throw NetworkException(10055, "message from client is incomplete 1");
 
             length = *(reinterpret_cast<uint32_t*>(msg));
             recvd = 0;
@@ -285,7 +285,7 @@ namespace OpenLogReplicator {
             }
 
             if (length < *(reinterpret_cast<uint64_t*>(msg)))
-                throw NetworkException(10055, "message from client is incomplete");
+                throw NetworkException(10055, "message from client is incomplete 2");
 
             length = *(reinterpret_cast<uint64_t*>(msg));
             recvd = 0;
@@ -344,7 +344,7 @@ namespace OpenLogReplicator {
         if (*(reinterpret_cast<uint32_t*>(msg)) < 0xFFFFFFFF) {
             // 32-bit message length
             if (length < *(reinterpret_cast<uint32_t*>(msg)))
-                throw NetworkException(10055, "message from client is incomplete");
+                throw NetworkException(10055, "message from client is incomplete 3");
 \
             length = *(reinterpret_cast<uint32_t*>(msg));
             recvd = 0;
@@ -377,7 +377,7 @@ namespace OpenLogReplicator {
             }
 
             if (length < *(reinterpret_cast<uint64_t*>(msg)))
-                throw NetworkException(10055, "message from client is incomplete");
+                throw NetworkException(10055, "message from client is incomplete 4");
 
             length = *(reinterpret_cast<uint64_t*>(msg));
             recvd = 0;
