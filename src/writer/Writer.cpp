@@ -44,6 +44,7 @@ namespace OpenLogReplicator {
             maxQueueSize(0),
             queue(nullptr),
             streaming(false) {
+        ctx-info(0, "writer started for " + std::to_string(database));
     }
 
     Writer::~Writer() {

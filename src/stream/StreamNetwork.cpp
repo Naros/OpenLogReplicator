@@ -316,6 +316,8 @@ namespace OpenLogReplicator {
     uint64_t StreamNetwork::receiveMessageNB(void* msg, uint64_t length) {
         uint64_t recvd = 0;
 
+        printf("receiveMessageNB(length=%d)\n", length);
+
         // Read message length
         while (recvd < sizeof(uint32_t)) {
             if (ctx->softShutdown)

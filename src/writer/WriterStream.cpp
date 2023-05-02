@@ -75,10 +75,10 @@ namespace OpenLogReplicator {
     void WriterStream::processInfo() {
         response.Clear();
         if (request.database_name() != database) {
-            ctx->logTrace(TRACE_WRITER, "client requested database: " + std::string(request.database_name()) + " instead of " + database);
+            ctx->info(TRACE_WRITER, "client requested database: " + std::string(request.database_name()) + " instead of " + database);
             response.set_code(pb::ResponseCode::INVALID_DATABASE);
         } else if (metadata->firstDataScn != ZERO_SCN) {
-            ctx->logTrace(TRACE_WRITER, "client requested scn: " + std::to_string(metadata->firstDataScn) + " when already started");
+            ctx->info(TRACE_WRITER, "client requested scn: " + std::to_string(metadata->firstDataScn) + " when already started");
             response.set_code(pb::ResponseCode::STARTED);
             response.set_scn(metadata->firstDataScn);
         } else {
@@ -89,7 +89,7 @@ namespace OpenLogReplicator {
     void WriterStream::processStart() {
         response.Clear();
         if (request.database_name() != database) {
-            ctx->logTrace(TRACE_WRITER, "client requested database: " + std::string(request.database_name()) + " instead of " + database);
+            ctx->info(TRACE_WRITER, "client requested database: " + std::string(request.database_name()) + " instead of " + database);
             response.set_code(pb::ResponseCode::INVALID_DATABASE);
             return;
         }
@@ -153,7 +153,7 @@ namespace OpenLogReplicator {
             ctx->info(0, "streaming to client");
             streaming = true;
         } else {
-            ctx->logTrace(TRACE_WRITER, "client requested database: " + std::string(request.database_name()) + " instead of " + database);
+            ctx->info(TRACE_WRITER, "client requested database: " + std::string(request.database_name()) + " instead of " + database);
             response.set_code(pb::ResponseCode::INVALID_DATABASE);
         }
     }
