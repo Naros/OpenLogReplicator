@@ -171,7 +171,7 @@ namespace OpenLogReplicator {
                 ctx->info(0, "read checkpoints");
                 metadata->readCheckpoints();
                 if (metadata->firstDataScn == ZERO_SCN || metadata->sequence == ZERO_SEQ) {
-                    ctx-info(0, "metadata firstDataScn == ZERO_SCN || sequence == ZERO_SEQ");
+                    ctx->info(0, "metadata firstDataScn == ZERO_SCN || sequence == ZERO_SEQ");
                     positionReader();
                 }
 
