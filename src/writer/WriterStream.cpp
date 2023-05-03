@@ -73,6 +73,7 @@ namespace OpenLogReplicator {
     }
 
     void WriterStream::processInfo() {
+        ctx->info(0, "processInfo()");
         response.Clear();
         if (request.database_name() != database) {
             ctx->info(TRACE_WRITER, "client requested database: " + std::string(request.database_name()) + " instead of " + database);
@@ -87,6 +88,7 @@ namespace OpenLogReplicator {
     }
 
     void WriterStream::processStart() {
+        ctx->info(0, "processStart()");
         response.Clear();
         if (request.database_name() != database) {
             ctx->info(TRACE_WRITER, "client requested database: " + std::string(request.database_name()) + " instead of " + database);
@@ -147,6 +149,7 @@ namespace OpenLogReplicator {
     }
 
     void WriterStream::processRedo() {
+        ctx->info(0, "processRedo()");
         response.Clear();
         if (request.database_name() == database) {
             response.set_code(pb::ResponseCode::STREAMING);
@@ -159,6 +162,7 @@ namespace OpenLogReplicator {
     }
 
     void WriterStream::processConfirm() {
+        ctx->info(0, "processConfirm()");
         if (request.database_name() == database) {
             while (currentQueueSize > 0 && queue[0]->scn <= request.scn())
                 confirmMessage(queue[0]);
