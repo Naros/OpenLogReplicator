@@ -657,6 +657,7 @@ namespace OpenLogReplicator {
 
     void ReplicatorOnline::positionReader() {
         ctx->info(0, "positionReader()");
+        ctx->info(0, "metadata->firstDataScn=" + std::to_string(metadata->firstDataScn));
         // Position by time
         if (metadata->startTime.length() > 0) {
             ctx->info(0, "metadata->startTime provided");
