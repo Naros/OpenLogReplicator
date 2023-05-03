@@ -152,22 +152,28 @@ namespace OpenLogReplicator {
         }
 
         try {
+            ctx->info(0, "Loading database metadata");
             loadDatabaseMetadata();
 
             do {
+                ctx->info(0, "Waiting for replication");
                 metadata->waitForReplication();
                 if (ctx->softShutdown)
                     break;
                 if (metadata->status == METADATA_STATUS_INITIALIZE)
                     continue;
 
+                ctx->info(0, "Print start message");
                 printStartMsg();
                 if (ctx->softShutdown)
                     break;
 
+                ctx->info(0, "read checkpoints");
                 metadata->readCheckpoints();
-                if (metadata->firstDataScn == ZERO_SCN || metadata->sequence == ZERO_SEQ)
+                if (metadata->firstDataScn == ZERO_SCN || metadata->sequence == ZERO_SEQ) {
+                    ctx-info(0, "metadata firstDataScn == ZERO_SCN || sequence == ZERO_SEQ");
                     positionReader();
+                }
 
                 ctx->info(0, "current resetlogs is: " + std::to_string(metadata->resetlogs));
                 ctx->info(0, "first data SCN: " + std::to_string(metadata->firstDataScn));
