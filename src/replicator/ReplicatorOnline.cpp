@@ -679,7 +679,7 @@ namespace OpenLogReplicator {
             metadata->firstDataScn = firstDataScn;
 
         } else if (metadata->startTimeRel > 0) {
-            ctx-info(0, "metadata->startTimeRel provided");
+            ctx->info(0, "metadata->startTimeRel provided");
             DatabaseStatement stmt(conn);
             if (standby)
                 throw RuntimeException(10026, "can't position by relative time for standby database");
