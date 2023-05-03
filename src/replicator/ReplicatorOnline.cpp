@@ -656,8 +656,10 @@ namespace OpenLogReplicator {
     }
 
     void ReplicatorOnline::positionReader() {
+        ctx->info(0, "positionReader()");
         // Position by time
         if (metadata->startTime.length() > 0) {
+            ctx->info(0, "metadata->startTime provided");
             DatabaseStatement stmt(conn);
             if (standby)
                 throw RuntimeException(10024, "can't position by time for standby database");
@@ -677,6 +679,7 @@ namespace OpenLogReplicator {
             metadata->firstDataScn = firstDataScn;
 
         } else if (metadata->startTimeRel > 0) {
+            ctx-info(0, "metadata->startTimeRel provided");
             DatabaseStatement stmt(conn);
             if (standby)
                 throw RuntimeException(10026, "can't position by relative time for standby database");
@@ -695,6 +698,8 @@ namespace OpenLogReplicator {
 
         // NOW
         } else if (metadata->firstDataScn == ZERO_SCN || metadata->firstDataScn == 0) {
+            ctx->info(0, "NOW");
+            ctx->info(0, SQL_GET_DATABASE_SCN);
             DatabaseStatement stmt(conn);
             if (ctx->trace & TRACE_SQL)
                 ctx->logTrace(TRACE_SQL, SQL_GET_DATABASE_SCN);
