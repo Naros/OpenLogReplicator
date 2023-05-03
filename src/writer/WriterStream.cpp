@@ -134,18 +134,26 @@ namespace OpenLogReplicator {
         }
 
         // TODO: wait for start
+        while (true) {
+            if (metadata->firstDataScn != ZERO_SCN) {
+                ctx->info(0, "replication started");
+                break;
+            }
+            ctx->info(0, "waiting on replication");
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
 
         // FIXME: the code is invalid here, the writer module should check if the Replicator
         // actually started and return proper information to the client
         // current workaround is to assume that it did start
 
-        //if (metadata->firstDataScn != ZERO_SCN) {
+        if (metadata->firstDataScn != ZERO_SCN) {
             response.set_code(pb::ResponseCode::STARTED);
             response.set_scn(metadata->firstDataScn);
-        //} else {
-        //    ctx->logTrace(TRACE_WRITER, "client did not provide starting scn");
-        //    response.set_code(pb::ResponseCode::FAILED_START);
-        //}
+        } else {
+            ctx->logTrace(TRACE_WRITER, "client did not provide starting scn");
+            response.set_code(pb::ResponseCode::FAILED_START);
+        }
     }
 
     void WriterStream::processRedo() {
