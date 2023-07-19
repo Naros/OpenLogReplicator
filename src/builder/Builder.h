@@ -244,6 +244,10 @@ namespace OpenLogReplicator {
         void builderCommit(bool force) {
             if (messageLength == 0)
                 throw RedoLogException(50058, "output buffer - commit of empty transaction");
+            if (!msg and force) {
+                printf("Creating new transaction because commit is forced\n");
+                builderBegin(0, 0);
+            }
 
             msg->queueId = lastBuilderQueue->id;
             builderShift((8 - (messageLength & 7)) & 7, false);
