@@ -153,6 +153,8 @@ namespace OpenLogReplicator {
                 column->type = SYS_COL_TYPE_BLOB;
         }
 
+		printf("column %s has type %d\n", column->name.c_str(), column->type);
+
         switch (column->type) {
         case SYS_COL_TYPE_VARCHAR:
         case SYS_COL_TYPE_CHAR:

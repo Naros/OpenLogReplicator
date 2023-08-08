@@ -67,8 +67,10 @@ namespace OpenLogReplicator {
                     && typeNo != SYS_COL_TYPE_INTERVAL_YEAR_TO_MONTH
                     && typeNo != SYS_COL_TYPE_INTERVAL_DAY_TO_SECOND
                     && typeNo != SYS_COL_TYPE_UROWID
-                    && typeNo != SYS_COL_TYPE_TIMESTAMP_WITH_LOCAL_TZ)
-                return;
+                    && typeNo != SYS_COL_TYPE_TIMESTAMP_WITH_LOCAL_TZ) {
+				printf("column %s is not supported, ignored.\n", table->columns[col]->name.c_str(), table->columns[col]->type);
+				return;
+			}
         }
 
         if (hasPreviousColumn)
