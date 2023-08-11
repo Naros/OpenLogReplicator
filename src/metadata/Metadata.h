@@ -94,6 +94,7 @@ namespace OpenLogReplicator {
         uint64_t defaultCharacterMapId;
         uint64_t defaultCharacterNcharMapId;
         typeScn firstDataScn;
+		typeScn lastConfirmedScn;
         typeScn     firstSchemaScn;
         std::set<RedoLog*> redoLogs;
 

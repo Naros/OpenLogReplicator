@@ -71,6 +71,7 @@ namespace OpenLogReplicator {
             defaultCharacterMapId(0),
             defaultCharacterNcharMapId(0),
             firstDataScn(ZERO_SCN),
+			lastConfirmedScn(ZERO_SCN),
             firstSchemaScn(ZERO_SCN),
             resetlogs(0),
             oracleIncarnationCurrent(nullptr),

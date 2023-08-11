@@ -152,6 +152,7 @@ namespace OpenLogReplicator {
         }
 
         builder->releaseBuffers(maxId);
+		metadata->lastConfirmedScn = msg->scn;
     }
 
     void Writer::run() {
