@@ -95,7 +95,7 @@ namespace OpenLogReplicator {
         }
 
         if (metadata->firstDataScn != ZERO_SCN) {
-            ctx->logTrace(TRACE_WRITER, "client requested scn: " + std::to_string(metadata->firstDataScn) + " when already started");
+            ctx->info(0, "client requested scn: " + std::to_string(metadata->firstDataScn) + " when already started");
             response.set_code(pb::ResponseCode::ALREADY_STARTED);
             response.set_scn(metadata->firstDataScn);
             return;
