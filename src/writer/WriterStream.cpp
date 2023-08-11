@@ -78,7 +78,7 @@ namespace OpenLogReplicator {
             ctx->warning(60035, "unknown database requested, got: " + request.database_name() + ", expected: " + database);
             response.set_code(pb::ResponseCode::INVALID_DATABASE);
         } else if (metadata->firstDataScn != ZERO_SCN) {
-            ctx->logTrace(TRACE_WRITER, "client requested scn: " + std::to_string(metadata->firstDataScn) + " when already started");
+            ctx->info(0, "client requested scn: " + std::to_string(metadata->firstDataScn) + " when already started");
             response.set_code(pb::ResponseCode::STARTED);
             response.set_scn(confirmedScn);
         } else {
